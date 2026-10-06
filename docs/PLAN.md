@@ -1,9 +1,10 @@
 # AI Image Detector — Project Plan
 
-Turning a Colab coursework project (CIFAKE CNN, 0.96 macro F1) into a refined,
+Turning a Colab coursework project (CIFAKE CNN, reported 0.96 F1 — not
+macro F1 and measured with a leaky validation split; see Background) into a refined,
 tested, deployed web application.
 
-**Current section: 1.4**
+**Current section: 2.1**
 
 Progress markers: `[ ]` not started, `[~]` in progress, `[x]` done.
 
@@ -34,14 +35,43 @@ TensorFlow has no GPU support on native Windows (since 2.11), so the old
 **Decision:** develop and run Chapter 2 training on native Windows CPU (Colab if too
 slow); revisit WSL2 + GPU at the start of Chapter 4.
 
+## Repository (set up in 1.4)
+
+- Remote: https://github.com/HDoubleH/ai-image-detection (public). Local folder name
+  differs (`ai-image-detector`); harmless.
+- The remote had 10 prior coursework commits (browser uploads/deletes); merged with
+  `--allow-unrelated-histories` instead of force-pushing. The old 81-line README is
+  recoverable via `git show 18ba11e:README.md` (possibly useful for 11.5).
+- A stray, commit-less repo at `C:\Users\owenh\.git` was deleted in 1.4.
+- Git global: `init.defaultBranch=main`, commit email set to the GitHub account's.
+  `gh` CLI is not installed; GitHub is used via the web UI + Git Credential Manager.
+
+## Session notes (handoff for the next session)
+
+- **Chapter 1 is complete.** Next: **2.1** (start with the Chapter 2 overview).
+  At session start, run `git status`: commit/push anything left over first.
+- **Python env:** `.venv` in the project root (Python 3.12.5), direct deps pinned in
+  `requirements.txt` (TF 2.21.0, Keras 3.x). Optional deps from the notebook (`cv2`,
+  `matplotlib`, `tqdm`) are deliberately *not* installed until a section needs them.
+- **Model facts (verified in 1.5):** `best_cnn.keras` loads in the new env; input
+  `(None, 32, 32, 3)`, output `(None, 1)` sigmoid = **P(REAL)** (class 1 = REAL in the
+  notebook). Loading warns about skipped RMSprop optimizer state — harmless for
+  inference; use `load_model(..., compile=False)` when serving (5.7).
+- Old `../AIDetector/cifake_env` (2.4 GB) is no longer needed; Owen was told to delete it.
+- **Concepts to reinforce** (Owen's answers were close but imprecise):
+  training–serving skew = training and serving code *preprocess differently* (not
+  "training on the server"); rejected/non-fast-forward push vs. merge conflict;
+  leaked key → *rotate first*, then clean history. Revisit briefly when relevant
+  (2.6, Ch. 9, 10.5).
+
 ---
 
 ## Chapter 1 — Project Foundations
 - [x] 1.1 Project and architecture overview (no implementation)
 - [x] 1.2 Understanding the technology stack
 - [x] 1.3 Setting up the development environment (check what's installed; GPU vs Colab for training)
-- [~] 1.4 Creating the repository (git init, .gitignore for data/venv/model weights, GitHub, first commit)
-- [ ] 1.5 Python and virtual environments
+- [x] 1.4 Creating the repository (git init, .gitignore for data/venv/model weights, GitHub, first commit)
+- [x] 1.5 Python and virtual environments
 
 ## Chapter 2 — From Notebook to Python Project
 - [ ] 2.1 Why notebooks don't ship (state, ordering, reproducibility)
