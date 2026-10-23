@@ -4,7 +4,7 @@ Turning a Colab coursework project (CIFAKE CNN, reported 0.96 F1 — not
 macro F1 and measured with a leaky validation split; see Background) into a refined,
 tested, deployed web application.
 
-**Current section: 2.1**
+**Current section: 2.2**
 
 Progress markers: `[ ]` not started, `[~]` in progress, `[x]` done.
 
@@ -53,7 +53,7 @@ slow); revisit WSL2 + GPU at the start of Chapter 4.
   Git history was replaced with a single fresh commit (orphan branch + force push).
   Before any future commit, scan for secrets by *reading* files, not just grepping for
   "key/token/secret" — the 1.4 check missed this.
-- **Chapter 1 is complete.** Next: **2.1** (start with the Chapter 2 overview).
+- **Chapter 1 and 2.1 complete.** Next: **2.2** (project layout, `src/` package).
   At session start, run `git status`: commit/push anything left over first.
 - **Python env:** `.venv` in the project root (Python 3.12.5), direct deps pinned in
   `requirements.txt` (TF 2.21.0, Keras 3.x). Optional deps from the notebook (`cv2`,
@@ -79,7 +79,7 @@ slow); revisit WSL2 + GPU at the start of Chapter 4.
 - [x] 1.5 Python and virtual environments
 
 ## Chapter 2 — From Notebook to Python Project
-- [ ] 2.1 Why notebooks don't ship (state, ordering, reproducibility)
+- [x] 2.1 Why notebooks don't ship (state, ordering, reproducibility)
 - [ ] 2.2 Project layout and Python packages (`src/` layout)
 - [ ] 2.3 Configuration (paths, image size, seeds in one place)
 - [ ] 2.4 Data loading module with one label convention
